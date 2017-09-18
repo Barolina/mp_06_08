@@ -1,0 +1,39 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mp06 </title>
+
+    {% block head %}
+    {% include 'material/includes/material_css.html' %}
+
+    <style type="text/css">
+      html, body {
+          background: #eee;
+          height: 100%;
+      }
+    </style>
+
+    {% block extrahead %}{% endblock %}
+    {% endblock %}
+</head>
+
+{% block breadcrumbs_items %}
+{% endblock %}
+
+<body class="valign-wrapper2">
+      {% block sidebar %}{% endblock %}
+
+      <div class="{% block container_class %}container expand-on-small-only{% endblock %}">
+          {% block content %}
+
+          {% endblock %}
+      </div>
+      {% block js %}
+      <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+      {% include 'material/includes/material_js.html' %}
+      {% block extrajs %}{% endblock %}
+      {% endblock %}
+  </body>
+</html>

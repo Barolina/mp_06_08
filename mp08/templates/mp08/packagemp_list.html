@@ -1,0 +1,76 @@
+{% extends 'mp08/base.html' %}
+{% load i18n material_frontend %}
+{% load staticfiles %}
+{% load sitetree %}
+
+{% block breadcrumbs_items %}
+      <a href="{% url 'mp08:packages_list' %}">Home</a>
+{% endblock %}
+
+{% block sidebar %}
+     {% if sitetree_items|length_is:"1" %}
+     {% else %}
+         <div class="container">
+          {% sitetree_breadcrumbs from "test" template "sitetree/breadcrumbs_bootstrap3.html" %}
+         </div>
+     {% endif %}
+
+
+    {% block test_cat_detail %}
+        {% block test_page_detail %}
+        {% endblock %}
+    {% endblock %}
+{% endblock %}
+
+{% block content %}
+    {% if sitetree_items|length_is:"1" %}
+    {% else %}
+
+     <ul class="breadcrumbs menu">
+        {% for item in sitetree_items %}
+            <li {% if item.is_current or item.in_current_branch %} role="presentation" class="active"{% endif %}>
+                <a role="menuitem" href="{% sitetree_url for item %}" {% if item.hint %}title="{{ item.hint }}"{% endif %}>{{ item.title_resolved }}</a>
+            </li>
+        {% endfor %}
+     </ul>
+    {% endif %}
+
+     <ul>
+    {%  if object_list %}
+
+           <a href="{% url 'mp08:mp_add' %}" class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored">Add packege</a><br>
+
+           <table class="mdl-data-table mdl-js-data-table">
+              <thead>
+                <tr>
+                  <th class="mdl-data-table__cell--non-numeric">Наименование</th>
+                  <th>_</th>
+                  <th>+</th>
+                </tr>
+              </thead>
+              <tbody>
+                   {% for el in object_list %}
+                        <tr>
+                            <td  class="mdl-data-table__cell--non-numeric"><a href="{{ el.get_absolute_url }}">{{ el}}</a></td>
+                            <td>{{el.method }}</td>
+                            <td>
+                            (<a href="{% url "mp08:mp_update" pk=el.id %}">edit</a>) |
+                            </td>
+                            <td>
+                              (<a href="{% url "mp08:package_delete" pk=el.id %}">delete</a>)
+                            </td>
+                         </tr>
+                    {% empty %}
+        {#                <li>No page yet.</li>#}
+                    {% endfor %}
+              </tbody>
+            </table>
+
+    {% endif %}
+    </ul>
+
+{% block mp_detail %}
+
+{% endblock %}
+
+{% endblock %}

@@ -1,0 +1,33 @@
+{% extends 'mp08/packagemp_list.html' %}
+
+{% block mp_detail %}
+    <a href="{{ mp.get_next_by.get_absolute_url }}"></a>
+
+    GeneralWorks =
+    {% if generalworks %}
+          <a href="{% url 'mp08:generalworks_create_update' mp.pk generalworks.pk%}">{{ generalworks }} </a>
+          <br>
+          {% if client %}
+              <a href="{% url 'mp08:person_update' mp.pk client.pk %}">{{ client }}</a>
+              {{ client }}
+          {% endif %}
+    {% else %}
+          <a href="{% url 'mp08:generalworks_add' mp.pk %}">Add generalworks</a>
+    {% endif %}
+
+    <div class="row">
+    <div class="container">
+        <ul>
+        {% for page in method %}
+            <li>
+                <a href="/test/cat1/{{ object.pk }}/page/{{ page.pk }}/">{{ page.name }}/</a>
+             </li>
+        {% empty %}
+            <li>No pages yet.</li>
+        {% endfor %}
+     </ul>
+    </div>
+    </div>
+
+
+{% endblock %}

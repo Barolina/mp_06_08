@@ -1,0 +1,15 @@
+{% extends 'mp08/packagemp_list.html' %}
+{% load staticfiles %}
+{% load material_form %}
+
+{% block content %}
+    {% if object.id  %}
+        Delete {{ object }}
+    {% endif %}
+
+   <form action="{{ action }}" method="post">{% csrf_token %}
+        <button type="submit" name="_submit" class="btn">Delete</button>
+    </form>
+
+    <a href="{% url "mp08:packages_list" %}">back to list</a>
+{% endblock %}

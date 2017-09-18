@@ -1,0 +1,31 @@
+{% extends 'mp08/packagemp_list.html' %}
+{% load staticfiles %}
+{% load material_form %}
+
+{% block content %}
+    {% if object.id  %}
+        Edit data
+    {% endif %}
+
+   <form action="{% url 'package_method_update' pk=object.id %}" method="post">{% csrf_token %}
+        {{ form.management_form }}
+        {% for method_form in form %}
+
+            <ul>
+            {{ method_form.as_ul }}
+            </ul>
+
+        {% endfor %}
+        <button type="submit" name="_submit" class="btn">Добавить</button>
+    </form>
+
+    <br>
+    {% if object.id %}
+    <a href="{% url "package_method_update" pk=object.id %}">
+      Edit Addresses
+    </a> <br>
+     -->    ( <a href="{% url "package_delete" pk=object.id %}">Deletesss</a>)
+    {% endif %}
+    <br>
+    <a href="{% url "packages_list" %}">back to list</a>
+{% endblock %}

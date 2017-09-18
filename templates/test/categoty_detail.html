@@ -1,0 +1,24 @@
+{% extends 'test/test.html' %}
+
+{% block test_cat_detail %}
+Test  detail :
+    current category: {{ categoty_page.title }}
+    <a href="{{ categoty_page.get_next_by.get_absolute_url }}"></a>
+
+    <div class="row">
+    <div class="container">
+    <h4>pages</h4>
+        <ul>
+        {% for page in pages %}
+            <li>
+            <a href="/test/cat1/{{ categoty_page.pk }}/page/{{ page.pk }}/">{{ page.title }}/</a>
+             </li>
+        {% empty %}
+            <li>No pages yet.</li>
+        {% endfor %}
+     </ul>
+    </div>
+    </div>
+
+
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'mp08/packagemp_list.html' %}
+{% load staticfiles %}
+{% load material_form %}
+
+{% block content %}
+    {% if object  %}
+         {{ object }}
+        <br>
+        Метод : {{ object.method }}
+    {% endif %}
+    <br>
+    <a href="{% url "mp08:packages_list" %}">back to list</a>
+{% endblock %}

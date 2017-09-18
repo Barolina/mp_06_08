@@ -1,0 +1,67 @@
+{% load staticfiles %}
+{% load sitetree %}
+
+<!DOCTYPE html>
+<html lang='en'>
+	<head>
+		<meta charset="utf-8">
+    	        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    	        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+		    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+{##}
+           {% include 'material/includes/material_css.html' %}
+            <script src="{% static 'material/js/jquery.js' %}"></script>
+            {% include 'material/includes/material_js.html' %}
+	</head>
+<body>
+
+<button type="button" class="btn btn-raised btn-danger">Danger</button>
+{#{% sitetree_menu from "test" include "this-children" %}#}
+<br>
+{% for item in sitetree_items %}
+        <li role="presentation" {% if item.is_current or item.in_current_branch %}class="active"{% endif %}>
+            <a role="menuitem" href="{% sitetree_url for item %}" {% if item.hint %}title="{{ item.hint }}"{% endif %}>{{ item.title_resolved }}</a>
+        </li>
+    {% endfor %}
+{#{% sitetree_menu from "basetree" include "this-children"  template "sitetree/breadcrumbs_bootstrap3.html"  %}#}
+<ul>
+    <li>
+        <a href="/test/">главная</a>
+        <ul>
+            {% for categor in categoty_list %}
+                <li>
+                  {{ categor.title }}
+                <a href="{{ categor.get_absolute_url }}">{{ categor.title }}</a>
+                 </li>
+            {% empty %}
+{#                <li>No page yet.</li>#}
+            {% endfor %}
+        </ul>
+    </li>
+</ul>
+
+
+<div class="container">
+    {% sitetree_breadcrumbs from "test" template "sitetree/breadcrumbs_bootstrap3.html" %}
+</div>
+
+{% block test_cat_detail %}
+     Catef Page;
+    {% block test_page_detail %}
+
+    {% endblock %}
+{% endblock %}
+
+
+{#{% sitetree_tree from "test"  %}#}
+
+{% block test_charter %}
+
+{% endblock %}
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>

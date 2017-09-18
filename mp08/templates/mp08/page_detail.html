@@ -1,0 +1,20 @@
+{% extends 'test/test.html' %}
+
+{% block test_cat_detail %}
+    <div class="container fa-sliders">
+   Inforamation:
+            <li>
+            <a href="/test/cat1/{{ categoty_page.pk }}/page/{{ pages.pk }}">{{ pages.title }}</a>
+             </li>
+    </div>
+
+{% endblock %}
+
+{% block test_page_detail %}
+Test  detail :
+    current page: {{ simple_page.title }}
+
+
+{% endblock %}
+
+

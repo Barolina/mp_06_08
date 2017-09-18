@@ -1,0 +1,9 @@
+{% extends "student/base.html" %}
+
+{% block content %}
+    {% for s in students %}
+        {{ s }}<br>
+    {% endfor %}
+    <br>
+    <a href="{% url 'addstudent' %}" class="btn btn-primary">Добавить студента</a>
+{% endblock %}
